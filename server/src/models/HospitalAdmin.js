@@ -23,15 +23,11 @@ const hospitalAdminSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Auth Hashing Layer 
-hospitalAdminSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error);
-  }
+hospitalAdminSchema.pre('save', async function () {
+  if (!this.isModified('password')) return;
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
 // Native password comparative method utilized during login flow later 
