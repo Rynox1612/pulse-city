@@ -5,9 +5,15 @@ const hospitalSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   address: { type: String, required: true, trim: true },
   city: { type: String, required: true, trim: true, index: true },
-  coordinates: {
-    lat: { type: Number, required: true },
-    lng: { type: Number, required: true }
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number] // [lng, lat]
+    }
   },
   specialties: [{ type: String, trim: true, index: true }], // Indexed for fast filtering
   emergencyAvailable: { type: Boolean, default: true },
@@ -29,5 +35,7 @@ const hospitalSchema = new mongoose.Schema({
   // Relationship to the Admin who runs this listing
   createdByAdmin: { type: mongoose.Schema.Types.ObjectId, ref: 'HospitalAdmin' }
 }, { timestamps: true });
+
+hospitalSchema.index({ location: "2dsphere" });
 
 module.exports = mongoose.model('Hospital', hospitalSchema);

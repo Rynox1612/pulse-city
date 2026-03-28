@@ -13,7 +13,8 @@ import HomePage from '../pages/public/HomePage';
 import HospitalsPage from '../pages/public/HospitalsPage';
 import HospitalDetailPage from '../pages/public/HospitalDetailPage';
 import DoctorsPage from '../pages/public/DoctorsPage';
-import { AboutPage, EmergencyMapPage, AIAssistantPage, ContactPage } from '../pages/public/PublicPages';
+import { AboutPage, AIAssistantPage, ContactPage } from '../pages/public/PublicPages';
+import EmergencyMapPage from '../pages/public/EmergencyMapPage';
 
 // Auth Pages
 import LoginPage from '../pages/auth/LoginPage';
